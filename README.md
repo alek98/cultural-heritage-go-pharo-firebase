@@ -7,6 +7,9 @@
 - Sistem omogucuje neulogovanim korisnicima da vide kutlurna dobra koja se nalaze u ponudi sistema. 
 - Korisnici mogu da pretrazuju i sortiraju kulturna dobra po raznim kriterijumima kao sto su naziv, lokacija (drzava, grad, ulica),prosecna ocena(rejting), broj recenzija (komentara), tip kulturnog dobra, broju lajkova, broju dislajkova.
 - Sistem omogucuje neulogovanim korisnicima da lajkuju i dislajkuju svako kulturno dobro koje se nalazi u ponudi sistema.
+- Komentari za recenzije od strane neautentifikovanog korisnika
+- ocenjivanje recenzije da li je korisna
+- ocenjivanje korisnika da li je azuran ili nije
 
 ## Arhitektura sistema
 Sistem se sastoji iz tri tehnologije: Pharo, Golang i Firebase.
