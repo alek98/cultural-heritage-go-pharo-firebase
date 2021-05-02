@@ -66,3 +66,30 @@ func (*ChRepo) GetAll() ([]model.Ch, error) {
 
 	return chs, nil
 }
+
+//TODO: CREATE SEARCH FUNCTION
+func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
+	client, _ := firestore.NewClient(ctx, projectId)
+	defer client.Close()
+
+	var chs []model.Ch
+	collectionRef := client.Collection(collectionName)
+	query := collectionRef.Where("name", "==", search.Name)
+	query = query.Where("avgRating", ">=", search.AvgRatingFrom)
+	query = query.Where("avgRating", "<=", search.AvgRatingTo)
+	// query = query.Where("")
+
+	iter := query.Documents(ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+
+		var ch model.Ch
+		doc.DataTo(&ch)
+		ch.Id = doc.Ref.ID
+		chs = append(chs, ch)
+	}
+	return chs, nil
+}
