@@ -9,7 +9,6 @@ import (
 	"net/http"
 
 	"cloud.google.com/go/firestore"
-	"google.golang.org/api/option"
 )
 
 func startServer() {
@@ -19,29 +18,27 @@ func startServer() {
 		fmt.Fprintf(w, "Working")
 	})
 
-	booksController := controller.NewBooksController()
-	myrouter.GET("/books", booksController.GetAll)
+	chController := controller.NewChController()
+	myrouter.POST("/chs", chController.Save)
+	myrouter.GET("/chs", chController.GetAll)
 
 	myrouter.SERVE(port)
 }
 
 func testFirebase() {
-	sa := option.WithCredentialsFile("../../../cultural-heritage-c8349-firebase-adminsdk.json")
 
 	ctx := context.Background()
-	client, err := firestore.NewClient(ctx, "cultural-heritage-c8349", sa)
+	client, err := firestore.NewClient(ctx, "cultural-heritage-c8349")
 	if err != nil {
 		log.Fatalf("ne radi %v", err)
 	}
 	defer client.Close()
 
-	iter := client.Collection("culturalHeritages").Documents(ctx)
-	for {
-		doc, err := iter.Next()
-		if err != nil {
-			log.Fatalf("brt ne radi %v", err)
-		}
-
-		fmt.Println(doc.Data())
+	ch := client.Doc("culturalHeritages/FHu8NeAv5VsPR9Jjq00p")
+	chSnapshot, err := ch.Get(ctx)
+	if err != nil {
+		fmt.Println("wtf has happend")
+		return
 	}
+	fmt.Println(chSnapshot.Data())
 }
