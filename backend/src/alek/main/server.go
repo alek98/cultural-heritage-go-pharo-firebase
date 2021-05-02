@@ -9,7 +9,6 @@ import (
 	"net/http"
 
 	"cloud.google.com/go/firestore"
-	"google.golang.org/api/option"
 )
 
 func startServer() {
@@ -22,15 +21,16 @@ func startServer() {
 	booksController := controller.NewBooksController()
 	myrouter.GET("/books", booksController.GetAll)
 
+	chController := controller.NewChController()
+	myrouter.POST("/chs", chController.Save)
+
 	myrouter.SERVE(port)
 }
 
 func testFirebase() {
 
-	sa := option.WithCredentialsFile("../../../cultural-heritage-c8349-firebase-adminsdk.json")
-
 	ctx := context.Background()
-	client, err := firestore.NewClient(ctx, "cultural-heritage-c8349", sa)
+	client, err := firestore.NewClient(ctx, "cultural-heritage-c8349")
 	if err != nil {
 		log.Fatalf("ne radi %v", err)
 	}

@@ -18,9 +18,7 @@ var (
 	myservice = service.NewChService()
 )
 
-// TODO: test function
 func (*ChController) Save(w http.ResponseWriter, request *http.Request) {
-
 	w.Header().Set("Content-Type", "application/json")
 
 	var culturalHeritage model.Ch
@@ -39,7 +37,6 @@ func (*ChController) Save(w http.ResponseWriter, request *http.Request) {
 		json.NewEncoder(w).Encode(err)
 		return
 	}
-
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(result)
 }
