@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"cloud.google.com/go/firestore"
+	"google.golang.org/api/iterator"
 )
 
 type ChRepo struct{}
@@ -43,4 +44,25 @@ func (*ChRepo) Save(ch *model.Ch) (*model.Ch, error) {
 	}
 
 	return ch, nil
+}
+
+func (*ChRepo) GetAll() ([]model.Ch, error) {
+	client, _ := firestore.NewClient(ctx, projectId)
+	defer client.Close()
+
+	var chs []model.Ch
+	iter := client.Collection(collectionName).Documents(ctx)
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+
+		var ch model.Ch
+		doc.DataTo(&ch)
+		ch.Id = doc.Ref.ID
+		chs = append(chs, ch)
+	}
+
+	return chs, nil
 }

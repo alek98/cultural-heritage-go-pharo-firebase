@@ -23,6 +23,7 @@ func startServer() {
 
 	chController := controller.NewChController()
 	myrouter.POST("/chs", chController.Save)
+	myrouter.GET("/chs", chController.GetAll)
 
 	myrouter.SERVE(port)
 }

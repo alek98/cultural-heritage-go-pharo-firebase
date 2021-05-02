@@ -18,3 +18,7 @@ var (
 func (*ChService) Save(ch *model.Ch) (*model.Ch, error) {
 	return repo.Save(ch)
 }
+
+func (*ChService) GetAll() ([]model.Ch, error) {
+	return repo.GetAll()
+}
