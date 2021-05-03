@@ -18,6 +18,5 @@ func main() {
 			3. run `go build && main.exe`
 			4. start coding
 	*/
-	// testFirebase()
 	startServer()
 }
