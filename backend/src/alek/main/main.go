@@ -18,17 +18,5 @@ func main() {
 			3. run `go build && main.exe`
 			4. start coding
 	*/
-	// testFirebase()
 	startServer()
-
-	// searchObj := &model.Search{
-	// 	Sort: model.Sort{SortByName: "asc"},
-	// }
-	// chrepo := repository.NewChRepo()
-	// chs, err := chrepo.Search(searchObj)
-	// if err != nil {
-	// 	fmt.Println("greska")
-	// } else {
-	// 	fmt.Println(chs)
-	// }
 }
