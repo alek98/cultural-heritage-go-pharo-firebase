@@ -24,9 +24,7 @@ func main() {
 	// startServer()
 
 	searchObj := &model.Search{
-		Name:          "Fruska Gora",
-		AvgRatingFrom: 4,
-		AvgRatingTo:   5,
+		Sort: model.Sort{SortByName: "asc"},
 	}
 	chrepo := repository.NewChRepo()
 	chs, err := chrepo.Search(searchObj)
