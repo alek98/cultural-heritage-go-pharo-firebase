@@ -132,3 +132,59 @@ func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
 	}
 	return chs, nil
 }
+
+func (*ChRepo) Like(chId string) (*model.Ch, error) {
+	client, err := firestore.NewClient(ctx, projectId)
+	if err != nil {
+		log.Fatalf("Cannot connect with firestore: %v", err)
+		return nil, err
+	}
+	defer client.Close()
+
+	docRef := client.Collection(collectionName).Doc(chId)
+	doc, _ := docRef.Get(ctx)
+	likes, _ := doc.DataAt("likes")
+	_, err = docRef.Update(ctx, []firestore.Update{
+		{
+			Path:  "likes",
+			Value: likes.(int64) + 1,
+		},
+	})
+
+	if err != nil {
+		log.Fatalf("Failed saving to firestore: %v", err)
+		return nil, err
+	}
+
+	var ch model.Ch
+	doc.DataTo(&ch)
+	return &ch, nil
+}
+
+func (*ChRepo) Dislike(chId string) (*model.Ch, error) {
+	client, err := firestore.NewClient(ctx, projectId)
+	if err != nil {
+		log.Fatalf("Cannot connect with firestore: %v", err)
+		return nil, err
+	}
+	defer client.Close()
+
+	docRef := client.Collection(collectionName).Doc(chId)
+	doc, _ := docRef.Get(ctx)
+	dislikes, _ := doc.DataAt("dislikes")
+	_, err = docRef.Update(ctx, []firestore.Update{
+		{
+			Path:  "dislikes",
+			Value: dislikes.(int64) + 1,
+		},
+	})
+
+	if err != nil {
+		log.Fatalf("Failed saving to firestore: %v", err)
+		return nil, err
+	}
+
+	var ch model.Ch
+	doc.DataTo(&ch)
+	return &ch, nil
+}
