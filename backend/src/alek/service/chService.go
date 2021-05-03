@@ -26,3 +26,11 @@ func (*ChService) GetAll() ([]model.Ch, error) {
 func (*ChService) Search(search *model.Search) ([]model.Ch, error) {
 	return repo.Search(search)
 }
+
+func (*ChService) Like(chId string) (*model.Ch, error) {
+	return repo.Like(chId)
+}
+
+func (*ChService) Disike(chId string) (*model.Ch, error) {
+	return repo.Dislike(chId)
+}

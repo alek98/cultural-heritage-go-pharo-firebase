@@ -19,4 +19,9 @@ func main() {
 			4. start coding
 	*/
 	startServer()
+
+	// chrepo := repository.NewChRepo()
+	// chrepo.Dislike(&model.Ch{
+	// 	Id: "Iuoshks2ylKp6CsgwLtv",
+	// })
 }

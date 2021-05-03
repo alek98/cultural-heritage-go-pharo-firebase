@@ -83,7 +83,7 @@ func (*ChController) Like(w http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	result, err := myservice.Like(&ch)
+	result, err := myservice.Like(ch.Id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(err)
@@ -104,7 +104,7 @@ func (*ChController) Disike(w http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	result, err := myservice.Disike(&ch)
+	result, err := myservice.Disike(ch.Id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(err)
