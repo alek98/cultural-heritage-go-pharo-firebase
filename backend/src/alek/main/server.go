@@ -21,6 +21,7 @@ func startServer() {
 	chController := controller.NewChController()
 	myrouter.POST("/chs", chController.Save)
 	myrouter.GET("/chs", chController.GetAll)
+	myrouter.POST("/chs-search", chController.Search)
 
 	myrouter.SERVE(port)
 }

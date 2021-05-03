@@ -22,3 +22,7 @@ func (*ChService) Save(ch *model.Ch) (*model.Ch, error) {
 func (*ChService) GetAll() ([]model.Ch, error) {
 	return repo.GetAll()
 }
+
+func (*ChService) Search(search *model.Search) ([]model.Ch, error) {
+	return repo.Search(search)
+}

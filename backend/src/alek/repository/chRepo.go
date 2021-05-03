@@ -73,7 +73,7 @@ func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
 	collectionRef := client.Collection(collectionName)
 	query := collectionRef.Query
 	// search
-	if search.AvgRatingTo != 0 {
+	if search.AvgRatingFrom != 0 {
 		query = query.Where("avgRating", ">=", search.AvgRatingFrom)
 	}
 	if search.AvgRatingTo != 0 {

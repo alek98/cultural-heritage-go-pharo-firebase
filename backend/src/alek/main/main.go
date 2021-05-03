@@ -1,8 +1,6 @@
 package main
 
 import (
-	"alek/model"
-	"alek/repository"
 	"fmt"
 )
 
@@ -21,16 +19,16 @@ func main() {
 			4. start coding
 	*/
 	// testFirebase()
-	// startServer()
+	startServer()
 
-	searchObj := &model.Search{
-		Sort: model.Sort{SortByName: "asc"},
-	}
-	chrepo := repository.NewChRepo()
-	chs, err := chrepo.Search(searchObj)
-	if err != nil {
-		fmt.Println("greska")
-	} else {
-		fmt.Println(chs)
-	}
+	// searchObj := &model.Search{
+	// 	Sort: model.Sort{SortByName: "asc"},
+	// }
+	// chrepo := repository.NewChRepo()
+	// chs, err := chrepo.Search(searchObj)
+	// if err != nil {
+	// 	fmt.Println("greska")
+	// } else {
+	// 	fmt.Println(chs)
+	// }
 }
