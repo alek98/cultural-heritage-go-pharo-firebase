@@ -31,14 +31,14 @@ func (*ReviewRepo) GetAll() ([]model.Review, error) {
 	return reviews, nil
 }
 
-func (*ReviewRepo) RateReview(reviewId string, newRating int64) (*model.Review, error) {
+func (*ReviewRepo) RateReview(reviewId string, newRating float64) (*model.Review, error) {
 	docRef := client.Collection(colReviews).Doc(reviewId)
 	doc, _ := docRef.Get(ctx)
 	var review model.Review
 	doc.DataTo(&review)
 
 	//calc ratings
-	review.Rating = review.Rating*float64(review.TotalRatings) + float64(newRating)
+	review.Rating = review.Rating*float64(review.TotalRatings) + newRating
 	review.TotalRatings++
 	review.Rating = review.Rating / float64(review.TotalRatings)
 

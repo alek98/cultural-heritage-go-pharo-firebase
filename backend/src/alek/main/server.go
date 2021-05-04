@@ -23,6 +23,7 @@ func startServer() {
 	myrouter.POST("/like", chController.Like)
 	myrouter.POST("/dislike", chController.Disike)
 	myrouter.GET("/reviews", reviewController.GetAll)
+	myrouter.POST("/reviews/rate", reviewController.RateReview)
 
 	myrouter.SERVE(port)
 }

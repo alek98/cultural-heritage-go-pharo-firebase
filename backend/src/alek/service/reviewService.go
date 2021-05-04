@@ -20,8 +20,8 @@ func (*ReviewService) GetAll() ([]model.Review, error) {
 	return reviewRepo.GetAll()
 }
 
-func (*ReviewService) RateReview(reviewId string, newRating int64) (*model.Review, error) {
-	if newRating > 0 && newRating < 6 {
+func (*ReviewService) RateReview(reviewId string, newRating float64) (*model.Review, error) {
+	if newRating == 1 || newRating == 2 || newRating == 3 || newRating == 4 || newRating == 5 {
 		return reviewRepo.RateReview(reviewId, newRating)
 
 	} else {
