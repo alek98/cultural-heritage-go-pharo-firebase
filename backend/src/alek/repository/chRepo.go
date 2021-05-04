@@ -15,15 +15,10 @@ func NewChRepo() *ChRepo {
 }
 
 func (*ChRepo) Save(ch *model.Ch) (*model.Ch, error) {
-	client, err := firestore.NewClient(ctx, projectId)
-	if err != nil {
-		log.Fatalf("Cannot connect with firestore: %v", err)
-		return nil, err
-	}
 
 	defer client.Close()
 
-	_, _, err = client.Collection(colChs).Add(ctx, ch)
+	_, _, err := client.Collection(colChs).Add(ctx, ch)
 
 	if err != nil {
 		log.Fatalf("Failed saving to firestore: %v", err)
