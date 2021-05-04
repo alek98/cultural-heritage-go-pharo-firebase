@@ -1,6 +1,7 @@
 package main
 
 import (
+	"alek/repository"
 	"fmt"
 )
 
@@ -18,7 +19,13 @@ func main() {
 			3. run `go build && main.exe`
 			4. start coding
 	*/
-	startServer()
+	// startServer()
+
+	//rate reviews
+	repository.NewReviewRepo().RateReview("7r6nJmWgzhIKl3aorbn7", 1)
+	repository.NewReviewRepo().RateReview("7r6nJmWgzhIKl3aorbn7", 3)
+	repository.NewReviewRepo().RateReview("7r6nJmWgzhIKl3aorbn7", 4)
+	repository.NewReviewRepo().RateReview("7r6nJmWgzhIKl3aorbn7", 5)
 
 	closeFirebaseConnection()
 }
