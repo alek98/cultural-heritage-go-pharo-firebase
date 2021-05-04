@@ -15,6 +15,7 @@ var (
 	colChs      = "culturalHeritages"
 	colReviews  = "reviews"
 	colComments = "comments"
+	colUsers    = "users"
 )
 
 func GetClient() *firestore.Client {
