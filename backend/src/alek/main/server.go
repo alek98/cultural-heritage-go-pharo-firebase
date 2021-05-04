@@ -2,6 +2,7 @@ package main
 
 import (
 	"alek/controller"
+	"alek/repository"
 	"alek/router"
 	"fmt"
 	"net/http"
@@ -22,4 +23,9 @@ func startServer() {
 	myrouter.POST("/dislike", chController.Disike)
 
 	myrouter.SERVE(port)
+}
+
+func closeFirebaseConnection() {
+	client := repository.GetClient()
+	client.Close()
 }

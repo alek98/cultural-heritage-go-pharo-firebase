@@ -19,4 +19,6 @@ func main() {
 			4. start coding
 	*/
 	startServer()
+
+	closeFirebaseConnection()
 }
