@@ -17,6 +17,7 @@ func startServer() {
 
 	chController := controller.NewChController()
 	reviewController := controller.NewReviewController()
+	commentController := controller.NewCommentController()
 	myrouter.POST("/chs", chController.Save)
 	myrouter.GET("/chs", chController.GetAll)
 	myrouter.POST("/chs-search", chController.Search)
@@ -24,6 +25,8 @@ func startServer() {
 	myrouter.POST("/dislike", chController.Disike)
 	myrouter.GET("/reviews", reviewController.GetAll)
 	myrouter.POST("/reviews/rate", reviewController.RateReview)
+	myrouter.GET("/comments", commentController.GetAll)
+	myrouter.POST("/comments", commentController.Save)
 
 	myrouter.SERVE(port)
 }

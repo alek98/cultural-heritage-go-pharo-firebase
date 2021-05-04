@@ -12,8 +12,9 @@ var (
 	client, _ = firestore.NewClient(ctx, projectId)
 
 	// collection names
-	colChs     = "culturalHeritages"
-	colReviews = "reviews"
+	colChs      = "culturalHeritages"
+	colReviews  = "reviews"
+	colComments = "comments"
 )
 
 func GetClient() *firestore.Client {
