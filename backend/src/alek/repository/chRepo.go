@@ -2,7 +2,6 @@ package repository
 
 import (
 	"alek/model"
-	"context"
 	"log"
 
 	"cloud.google.com/go/firestore"
@@ -15,22 +14,8 @@ func NewChRepo() *ChRepo {
 	return &ChRepo{}
 }
 
-var (
-	ctx            = context.Background()
-	projectId      = "cultural-heritage-c8349"
-	collectionName = "culturalHeritages"
-)
-
 func (*ChRepo) Save(ch *model.Ch) (*model.Ch, error) {
-	client, err := firestore.NewClient(ctx, projectId)
-	if err != nil {
-		log.Fatalf("Cannot connect with firestore: %v", err)
-		return nil, err
-	}
-
-	defer client.Close()
-
-	_, _, err = client.Collection(collectionName).Add(ctx, ch)
+	_, _, err := client.Collection(colChs).Add(ctx, ch)
 
 	if err != nil {
 		log.Fatalf("Failed saving to firestore: %v", err)
@@ -41,11 +26,8 @@ func (*ChRepo) Save(ch *model.Ch) (*model.Ch, error) {
 }
 
 func (*ChRepo) GetAll() ([]model.Ch, error) {
-	client, _ := firestore.NewClient(ctx, projectId)
-	defer client.Close()
-
 	var chs []model.Ch
-	iter := client.Collection(collectionName).Documents(ctx)
+	iter := client.Collection(colChs).Documents(ctx)
 	for {
 		doc, err := iter.Next()
 		if err == iterator.Done {
@@ -62,11 +44,9 @@ func (*ChRepo) GetAll() ([]model.Ch, error) {
 }
 
 func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
-	client, _ := firestore.NewClient(ctx, projectId)
-	defer client.Close()
 
 	var chs []model.Ch
-	collectionRef := client.Collection(collectionName)
+	collectionRef := client.Collection(colChs)
 	query := collectionRef.Query
 	// search
 	if search.AvgRatingFrom != 0 {
@@ -134,17 +114,10 @@ func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
 }
 
 func (*ChRepo) Like(chId string) (*model.Ch, error) {
-	client, err := firestore.NewClient(ctx, projectId)
-	if err != nil {
-		log.Fatalf("Cannot connect with firestore: %v", err)
-		return nil, err
-	}
-	defer client.Close()
-
-	docRef := client.Collection(collectionName).Doc(chId)
+	docRef := client.Collection(colChs).Doc(chId)
 	doc, _ := docRef.Get(ctx)
 	likes, _ := doc.DataAt("likes")
-	_, err = docRef.Update(ctx, []firestore.Update{
+	_, err := docRef.Update(ctx, []firestore.Update{
 		{
 			Path:  "likes",
 			Value: likes.(int64) + 1,
@@ -162,17 +135,10 @@ func (*ChRepo) Like(chId string) (*model.Ch, error) {
 }
 
 func (*ChRepo) Dislike(chId string) (*model.Ch, error) {
-	client, err := firestore.NewClient(ctx, projectId)
-	if err != nil {
-		log.Fatalf("Cannot connect with firestore: %v", err)
-		return nil, err
-	}
-	defer client.Close()
-
-	docRef := client.Collection(collectionName).Doc(chId)
+	docRef := client.Collection(colChs).Doc(chId)
 	doc, _ := docRef.Get(ctx)
 	dislikes, _ := doc.DataAt("dislikes")
-	_, err = docRef.Update(ctx, []firestore.Update{
+	_, err := docRef.Update(ctx, []firestore.Update{
 		{
 			Path:  "dislikes",
 			Value: dislikes.(int64) + 1,
