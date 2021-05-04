@@ -15,9 +15,6 @@ func NewChRepo() *ChRepo {
 }
 
 func (*ChRepo) Save(ch *model.Ch) (*model.Ch, error) {
-
-	defer client.Close()
-
 	_, _, err := client.Collection(colChs).Add(ctx, ch)
 
 	if err != nil {
