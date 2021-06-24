@@ -130,6 +130,7 @@ func (*ChRepo) Like(chId string) (*model.Ch, error) {
 	}
 
 	var ch model.Ch
+	doc, _ = docRef.Get(ctx)
 	doc.DataTo(&ch)
 	return &ch, nil
 }
@@ -151,6 +152,7 @@ func (*ChRepo) Dislike(chId string) (*model.Ch, error) {
 	}
 
 	var ch model.Ch
+	doc, _ = docRef.Get(ctx)
 	doc.DataTo(&ch)
 	return &ch, nil
 }
