@@ -9,7 +9,7 @@ import (
 )
 
 func startServer() {
-	port := ":8080"
+	port := ":8000"
 	myrouter := router.NewMuxRouter()
 	myrouter.GET("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Working")
