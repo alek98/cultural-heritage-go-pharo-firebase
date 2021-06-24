@@ -11,7 +11,7 @@ func main() {
 			1. cd firebase
 			2. run `firebase emulators:start --export-on-exit=testdata --import=testdata`
 
-		  How to run golang
+		  How to run golang (in cmd)
 			-----------------
 			1. cd src/alek/main
 			2. set  FIRESTORE_EMULATOR_HOST=localhost:8081

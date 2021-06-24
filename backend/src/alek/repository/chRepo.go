@@ -78,20 +78,20 @@ func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
 	}
 
 	// sort
-	if search.Sort.SortByName != "" {
-		if search.Sort.SortByName == "desc" {
+	if search.SortByName != "" {
+		if search.SortByName == "desc" {
 			query = query.OrderBy("name", firestore.Desc)
 		} else {
 			query = query.OrderBy("name", firestore.Asc)
 		}
-	} else if search.Sort.SortByRating != "" {
-		if search.Sort.SortByRating == "desc" {
-			query = query.OrderBy("rating", firestore.Desc)
+	} else if search.SortByRating != "" {
+		if search.SortByRating == "desc" {
+			query = query.OrderBy("avgRating", firestore.Desc)
 		} else {
-			query = query.OrderBy("rating", firestore.Asc)
+			query = query.OrderBy("avgRating", firestore.Asc)
 		}
-	} else if search.Sort.SortByChTypeName != "" {
-		if search.Sort.SortByChTypeName == "desc" {
+	} else if search.SortByChTypeName != "" {
+		if search.SortByChTypeName == "desc" {
 			query = query.OrderBy("chtype.name", firestore.Desc)
 		} else {
 			query = query.OrderBy("chtype.name", firestore.Asc)
