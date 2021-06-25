@@ -25,5 +25,12 @@
 **/bin
 **/pkg
 
+
+### other packages
+cloud.google.com/
+go.opencensus.io/
+golang.org/
+google.golang.org/
+
 ### FIREBASE PRIVATE KEY
 cultural-heritage-c8349-firebase-adminsdk.json
