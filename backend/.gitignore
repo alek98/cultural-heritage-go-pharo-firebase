@@ -1,6 +1,6 @@
 ### Go ###
 # Binaries for programs and plugins
-*.exe
+# *.exe
 *.exe~
 *.dll
 *.so
