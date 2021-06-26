@@ -65,7 +65,7 @@ func (*ChRepo) Search(search *model.Search) ([]model.Ch, error) {
 		query = query.Where("location.city", "==", search.City)
 	}
 	if search.Country != "" {
-		query = query.Where("location.country", "==", search.Street)
+		query = query.Where("location.country", "==", search.Country)
 	}
 	if search.Name != "" {
 		query = query.Where("name", "==", search.Name)
