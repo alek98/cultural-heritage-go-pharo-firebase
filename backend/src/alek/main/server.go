@@ -29,6 +29,7 @@ func startServer() {
 	myrouter.GET("/comments", commentController.GetAll)
 	myrouter.POST("/comments", commentController.Save)
 	myrouter.POST("/users/rate", userController.RateUser)
+	myrouter.GET("/users", userController.GetAll)
 
 	myrouter.SERVE(port)
 }

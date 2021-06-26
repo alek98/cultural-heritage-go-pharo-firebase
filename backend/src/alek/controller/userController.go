@@ -40,3 +40,16 @@ func (*UserController) RateUser(w http.ResponseWriter, request *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(user)
 }
+
+func (*UserController) GetAll(w http.ResponseWriter, request *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	users, err := userService.GetAll()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode("Error getting objects")
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(users)
+}

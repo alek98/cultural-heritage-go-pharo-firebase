@@ -25,3 +25,7 @@ func (*UserService) RateUser(userName string, newRating float64) (*model.User, e
 		return nil, err
 	}
 }
+
+func (*UserService) GetAll() ([]model.User, error) {
+	return userRepo.GetAll()
+}
